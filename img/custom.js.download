@@ -1,0 +1,92 @@
+// JavaScript Document
+jQuery(function($) {
+
+// Use strict 
+"use strict";
+	
+	//document ready
+	$(document).ready(function (){
+				
+		//Tabs - In such way needs to initiate each tab
+		$('#myTab a').click(function (e) {
+			e.preventDefault();
+			$(this).tab('show');
+		});
+		
+		// Create the dropdown nav for responsive
+		$("<select />").appendTo(".ddsmoothmenu ");
+		$("<option />", {
+			"selected": "selected",
+			"value": "",
+			"text": "Menu"
+		}).appendTo(".ddsmoothmenu select");
+		// Populate dropdown with nav items
+		$(".ddsmoothmenu  a").each(function () {
+			var el = $(this);
+			$("<option />", {
+				"value": el.attr("href"),
+				"text": el.text()
+			}).appendTo(".ddsmoothmenu select");
+		});
+		// To make dropdown actually work
+		// To make more unobtrusive: http://css-tricks.com/4064-unobtrusive-page-changer/
+		$(".ddsmoothmenu select").change(function () {
+			window.location = $(this).find("option:selected").val();
+		});
+		
+		// Portfolio Hoverlay
+		function imgHoverlay() {
+			$('.folio-thumb').hover(function () {
+				$(this).find('.img-overlay,.zoom').filter(':not(:animated)').animate({
+					opacity: 'show'
+				}, 200);
+			}, function () {
+				$(this).find('.img-overlay,.zoom').animate({
+					opacity: 'hide'
+				}, 200);
+			});
+		} imgHoverlay();
+		
+		// fitvids
+		$(".fluid-video-wrapper").fitVids();
+	
+	});
+});
+
+$(window).on('load', function(){
+	//Flexslider with fade effect
+	$('.image-slider-fade').flexslider({
+		animation: "fade",
+		slideshowSpeed: 4000,
+		animationDuration: 600,
+		controlNav: false,
+		keyboardNav: true,
+		directionNav: true,
+		pauseOnHover: true,
+		pauseOnAction: true,
+	});
+
+	//Flexslider with slide effect
+	$('.image-slider-slide').flexslider({
+		animation: "slide",
+		slideshowSpeed: 4000,
+		animationDuration: 600,
+		controlNav: false,
+		keyboardNav: true,
+		directionNav: true,
+		pauseOnHover: true,
+		pauseOnAction: true,
+	});
+
+	//Flexslider for testimonials
+	$('.review-slider').flexslider({
+		animation: "fade",
+		slideshowSpeed: 4000,
+		animationDuration: 600,
+		controlNav: true,
+		keyboardNav: true,
+		directionNav: false,
+		pauseOnHover: true,
+		pauseOnAction: true,
+	});
+});
